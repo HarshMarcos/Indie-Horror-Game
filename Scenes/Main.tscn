@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmvkn8na1vp0p"]
+[gd_scene load_steps=8 format=3 uid="uid://cmvkn8na1vp0p"]
 
 [ext_resource type="PackedScene" uid="uid://ds0daxmicw4lv" path="res://Scenes/Player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://dq0e6h404oohx" path="res://Scenes/Road.tscn" id="2_idj7w"]
@@ -9,21 +9,43 @@ size = Vector2(100, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_r150o"]
 size = Vector3(100, 0.1, 100)
 
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_idj7w"]
+
+[sub_resource type="Sky" id="Sky_kln2b"]
+sky_material = SubResource("PhysicalSkyMaterial_idj7w")
+
+[sub_resource type="Environment" id="Environment_rgh2o"]
+background_mode = 2
+sky = SubResource("Sky_kln2b")
+
 [node name="Main" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.393156, 1.50111, -0.719669)
 
 [node name="Player" parent="." instance=ExtResource("1_r150o")]
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="World" type="Node3D" parent="."]
+
+[node name="Environment" type="Node3D" parent="World"]
+
+[node name="Ground" type="MeshInstance3D" parent="World/Environment"]
 mesh = SubResource("PlaneMesh_r150o")
+skeleton = NodePath("../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Ground"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Ground/StaticBody3D"]
 shape = SubResource("BoxShape3D_r150o")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Road" parent="World/Environment" instance=ExtResource("2_idj7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/Environment"]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
 
-[node name="Road" parent="." instance=ExtResource("2_idj7w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
+[node name="Road2" parent="World/Environment" instance=ExtResource("2_idj7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, -20)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rgh2o")
+
+[node name="Props" type="Node3D" parent="."]
