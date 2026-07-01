@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dq0e6h404oohx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qp187"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qp187"]
+size = Vector3(5, 0.1, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qp187"]
+size = Vector3(6, 0.2, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b2mj0"]
+size = Vector3(0.1, 0.02, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpn0r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xpn0r"]
+size = Vector3(0.08, 0.02, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jioyu"]
+
+[node name="Road" type="Node3D"]
+
+[node name="RoadMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142817, 0.153799, -0.0177202)
+material_override = SubResource("StandardMaterial3D_qp187")
+mesh = SubResource("BoxMesh_qp187")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_qp187")
+
+[node name="CenterLine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337087, 0.502421, -0.0912609)
+mesh = SubResource("BoxMesh_b2mj0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpn0r")
+
+[node name="LeftEdge" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.06, 0)
+mesh = SubResource("BoxMesh_xpn0r")
+surface_material_override/0 = SubResource("StandardMaterial3D_jioyu")
+
+[node name="RightEdge" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.06, 0)
+mesh = SubResource("BoxMesh_xpn0r")
+surface_material_override/0 = SubResource("StandardMaterial3D_jioyu")
