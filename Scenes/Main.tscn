@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmvkn8na1vp0p"]
+[gd_scene load_steps=10 format=3 uid="uid://cmvkn8na1vp0p"]
 
 [ext_resource type="PackedScene" uid="uid://ds0daxmicw4lv" path="res://Scenes/Player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://dq0e6h404oohx" path="res://Scenes/Road.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://cnbgwyl0bwhtn" path="res://Scenes/Rock01.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://da6itxldp3fx" path="res://Assets/Models/Tree01.glb" id="4_rgh2o"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_r150o"]
 size = Vector2(100, 100)
@@ -56,3 +57,9 @@ environment = SubResource("Environment_rgh2o")
 
 [node name="Rock01" parent="Props" instance=ExtResource("3_kln2b")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3.5, 0, -5)
+
+[node name="Tree01" parent="Props" instance=ExtResource("4_rgh2o")]
+transform = Transform3D(1.81262, 0, 0.845237, 0, 2, 0, -0.845237, 0, 1.81262, 4, 0, -8)
+
+[node name="Tree02" parent="Props" instance=ExtResource("4_rgh2o")]
+transform = Transform3D(-1.30228, 0, 1.09274, 0, 1.7, 0, -1.09274, 0, -1.30228, -4, 0, -15)
