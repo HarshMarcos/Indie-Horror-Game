@@ -15,6 +15,10 @@ run/main_scene="uid://cmvkn8na1vp0p"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 move_forward={
