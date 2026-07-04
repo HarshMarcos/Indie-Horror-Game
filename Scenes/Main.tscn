@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmvkn8na1vp0p"]
+[gd_scene load_steps=14 format=3 uid="uid://cmvkn8na1vp0p"]
 
 [ext_resource type="PackedScene" uid="uid://ds0daxmicw4lv" path="res://Scenes/Player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://dq0e6h404oohx" path="res://Scenes/Road.tscn" id="2_idj7w"]
+[ext_resource type="Script" uid="uid://c4to0lg4h0ii5" path="res://Scenes/cat_trigger.gd" id="3_jw32o"]
 [ext_resource type="PackedScene" uid="uid://cnbgwyl0bwhtn" path="res://Scenes/Rock01.tscn" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://da6itxldp3fx" path="res://Assets/Models/Tree01.glb" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://bfp3ynpn2hn3y" path="res://Scenes/Cat.tscn" id="5_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://b7dpjjpw341n3" path="res://Scenes/CatActor.tscn" id="6_v1gob"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_r150o"]
 size = Vector2(100, 100)
@@ -19,6 +22,9 @@ sky_material = SubResource("PhysicalSkyMaterial_idj7w")
 [sub_resource type="Environment" id="Environment_rgh2o"]
 background_mode = 2
 sky = SubResource("Sky_kln2b")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_50glp"]
+size = Vector3(3, 2, 2)
 
 [node name="Main" type="Node3D"]
 
@@ -53,13 +59,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, -20)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World/Environment"]
 environment = SubResource("Environment_rgh2o")
 
+[node name="CatTrigger" type="Area3D" parent="World"]
+script = ExtResource("3_jw32o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/CatTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6.5)
+shape = SubResource("BoxShape3D_50glp")
+
 [node name="Props" type="Node3D" parent="."]
 
 [node name="Rock01" parent="Props" instance=ExtResource("3_kln2b")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 3.5, 0, -5)
+visible = false
 
 [node name="Tree01" parent="Props" instance=ExtResource("4_rgh2o")]
 transform = Transform3D(1.81262, 0, 0.845237, 0, 2, 0, -0.845237, 0, 1.81262, 4, 0, -8)
+visible = false
 
 [node name="Tree02" parent="Props" instance=ExtResource("4_rgh2o")]
 transform = Transform3D(-1.30228, 0, 1.09274, 0, 1.7, 0, -1.09274, 0, -1.30228, -4, 0, -15)
+visible = false
+
+[node name="Cat" parent="Props" instance=ExtResource("5_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -10)
+visible = false
+
+[node name="CatActor" parent="Props" instance=ExtResource("6_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.001, 0, -10.381)
+
+[node name="CatStartPoint" type="Marker3D" parent="Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -10.295)
+
+[node name="CatMiddlePoint" type="Marker3D" parent="Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.5)
+
+[node name="CatEndPoint" type="Marker3D" parent="Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10.5)
+
+[connection signal="body_entered" from="World/CatTrigger" to="World/CatTrigger" method="_on_body_entered"]

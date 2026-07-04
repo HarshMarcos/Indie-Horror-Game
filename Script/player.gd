@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
-const WALK_SPEED = 5.0
-const SPRINT_SPEED = 9.0
+@export var walk_speed := 5.0
+@export var sprint_speed := 9.0
+@export var speed_multiplier := 1.0
 
 const MOUSE_SENSITIVITY = 0.003
 
@@ -60,9 +61,12 @@ func _physics_process(delta):
 
 	var direction = (transform.basis * Vector3(input.x, 0, input.y)).normalized()
 
-	var speed = WALK_SPEED
+	var speed = walk_speed
+
 	if Input.is_action_pressed("sprint"):
-		speed = SPRINT_SPEED
+		speed = sprint_speed
+
+	speed *= speed_multiplier
 
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed

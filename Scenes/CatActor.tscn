@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7dpjjpw341n3"]
+
+[ext_resource type="Script" uid="uid://d3cbjkn7j1cbi" path="res://Script/cat_actor.gd" id="1_jyhy5"]
+[ext_resource type="PackedScene" uid="uid://hddf24s4ecqy" path="res://Scenes/Cat_01.tscn" id="1_vgckk"]
+[ext_resource type="AudioStream" uid="uid://btg8nsgcx6dbw" path="res://Assets/Audio/SFX/dragon-studio-cat-meow-401729.mp3" id="3_13in2"]
+
+[node name="CatActor" type="Node3D"]
+script = ExtResource("1_jyhy5")
+
+[node name="Model" parent="." instance=ExtResource("1_vgckk")]
+
+[node name="CatMeow" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_13in2")

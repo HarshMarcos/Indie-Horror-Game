@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://hddf24s4ecqy"]
+
+[ext_resource type="PackedScene" uid="uid://uwcbq5jbggj2" path="res://Assets/Models/Cat01.glb" id="1_yo3ko"]
+
+[node name="Cat01" instance=ExtResource("1_yo3ko")]
+
+[node name="12222_Cat_v1_l3" parent="." index="0"]
+transform = Transform3D(-8.74228e-10, 0, 0.02, 0, 0.02, 0, -0.02, 0, -8.74228e-10, 0, 0, 0)
