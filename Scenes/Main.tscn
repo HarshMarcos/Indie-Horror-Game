@@ -84,8 +84,11 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -10)
 visible = false
 
-[node name="CatActor" parent="Props" instance=ExtResource("6_v1gob")]
+[node name="CatActor" parent="Props" node_paths=PackedStringArray("start_point", "middle_point", "end_point") instance=ExtResource("6_v1gob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.001, 0, -10.381)
+start_point = NodePath("../CatStartPoint")
+middle_point = NodePath("../CatMiddlePoint")
+end_point = NodePath("../CatEndPoint")
 
 [node name="CatStartPoint" type="Marker3D" parent="Props"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -10.295)

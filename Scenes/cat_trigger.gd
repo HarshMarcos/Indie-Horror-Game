@@ -13,13 +13,13 @@ func _on_body_entered(body):
 
 	cat.play_meow()
 
-	await get_tree().create_timer(0.5).timeout
+	#await get_tree().create_timer(0.5).timeout
 
-	cat.look_at_player()
+	#cat.look_at_player()
 
 	await get_tree().create_timer(0.8).timeout
 
-	cat.can_move = true
+	cat.start_crossing()
 
 	await get_tree().create_timer(2.0).timeout
 
